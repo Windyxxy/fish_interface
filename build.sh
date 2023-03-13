@@ -57,7 +57,7 @@ if [ -d "${CURRENT_PATH}/proto/$1" ];then
   fi
   rm -rf *.proto
   # 修改 go 文件中的 json tag
-  cd $CURRENT_PATH && protoc-go-inject-tag -input=./golang_pb/blood/v1/*.pb.go
+  cd $CURRENT_PATH && protoc-go-inject-tag -input=./golang_pb/fish/v1/*.pb.go
 else
   echo "文件不存在"
   exit 1
