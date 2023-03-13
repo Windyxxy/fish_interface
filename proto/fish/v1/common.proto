@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package blood.v1;
+option go_package = "github.com/xxy/blood_game/proto/blood/v1;v1";
+
+message IRequestProtocol {
+  // @inject_tag: msgpack:"action"
+  string action = 1;
+  // @inject_tag: msgpack:"method"
+  string method = 2;
+  // @inject_tag: msgpack:"callback"
+  string callback = 3;
+  // @inject_tag: msgpack:"isCompress"
+  bool isCompress = 4; // true 表示 data 为 proto 编码的字节数组
+  // @inject_tag: msgpack:"channelId"
+  int32 channelId = 5;
+  // @inject_tag: msgpack:"data"
+  bytes data = 6;     // data 是 proto 编码的字节
+}
+
+message IResponseProtocol {
+  // @inject_tag: msgpack:"code" json:"code"
+  int32 code = 1;
+  // @inject_tag: msgpack:"isCompress" json:"isCompress"
+  bool isCompress = 2; // true 表示 data 为 proto 编码的字节数组
+  // @inject_tag: msgpack:"data" json:"data"
+  bytes data = 3;    // data 是 proto 编码的字节
+  // @inject_tag: msgpack:"callback" json:"callback"
+  string callback = 4;
+  //  string msg = 5; // 异常时的详细信息
+}
+
+// 该结构序列化后，放在 IResponseProtocol.data 中
+message RespData {
+  // @inject_tag: msgpack:"code"
+  int32 code = 1;
+  // @inject_tag: msgpack:"msg"
+  string msg = 2;
+  // @inject_tag: msgpack:"data"
+  bytes data = 3;
+  // google.protobuf.Struct data = 3;
+}
+
+message ErrInfo {
+  // 备注信息 | @inject_tag: msgpack:"msg" json:"msg"
+  string msg = 1;
+}
+
+// 客户端建立连接后，请求一次登录，参数是用户的 token
+message BloodUserLogin {
+  // 用户的 token，一般从平台获取 | @inject_tag: msgpack:"token" json:"token"
+  string token = 1;
+}
+
+message AccountInfo {
+  // user id | @inject_tag: msgpack:"uid" json:"uid"
+  int32 uid = 1;
+  // | @inject_tag: msgpack:"nickname" json:"nickname"
+  string nickname = 2;
+  // | @inject_tag: msgpack:"avatar" json:"avatar"
+  string avatar = 3;
+  // | @inject_tag: msgpack:"gender" json:"gender"
+  int32 gender = 4;
+}
+
+message NormalInfo {
+  // 备注信息 | @inject_tag: msgpack:"msg" json:"msg"
+  string msg = 1;
+}
+
+// 加入游戏时对应的游戏 id
+// 一场游戏的 id；全局唯一；不能有两场游戏 id 一样。
+message DataOfJoin {
+  // 平台提供的房间 id | @inject_tag: msgpack:"roomId" json:"roomId"
+  string roomId = 1;
+  // 对局 id | @inject_tag: msgpack:"gameId" json:"gameId"
+  string gameId = 2;
+  // 当前玩家的 nft id | @inject_tag: msgpack:"nft" json:"nft"
+  int32 nft  = 3;
+  // 是否与机器人对战 | @inject_tag: msgpack:"needBot" json:"needBot"
+  int32 needBot = 4;
+  // 机器人的 uid | @inject_tag: msgpack:"botId" json:"botId"
+  int32 botId = 5;
+  // 机器人的 nft | @inject_tag: msgpack:"botNft" json:"botNft"
+  int32 botNft = 6;
+  // 门票 | @inject_tag: msgpack:"ticket" json:"ticket"
+  float ticket = 7;
+  // 对战类型，区分 1v1，淘汰赛等 | @inject_tag: msgpack:"pvpType" json:"pvpType"
+  int32 pvpType = 8;
+  // 机器人的 ai 策略类型 | @inject_tag: msgpack:"aiPolicyType" json:"aiPolicyType"
+  int32 aiPolicyType = 9;
+    // 人数 | @inject_tag: msgpack:"num" json:"num"
+  int32 num = 10;
+    // 游戏挡位 | @inject_tag: msgpack:"level" json:"level"
+  int32 level = 11;
+}
+
+
+message DataInfoResp {
+  // @inject_tag: msgpack:"code"
+  int32 code = 1;
+  // @inject_tag: msgpack:"msg"
+  string msg = 2;
+}
+
+

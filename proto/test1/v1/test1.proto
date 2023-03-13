@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "github.com/suhanyujie/throw_interface/proto/test1/v1;v1";
+
+import "google/protobuf/descriptor.proto";
+//import "google/protobuf/any.proto";
+
+message IRequestProtocol {
+  string action = 1; // 类似于 controller
+  string method = 2;
+  string callback = 3;
+  bool isCompress = 4; // true 表示 data 为 proto 编码的字节数组
+  int32 channelId = 5;
+  bytes data = 6;
+}
+
+message IResponseProtocol {
+  int32 code = 1;
+  bool isCompress = 2; // true 表示 data 为 proto 编码的字节数组
+  bytes data = 3;
+  string callback = 4;
+}
+
+// A very simple protobuf message.
+message Person {
+  string name = 1;
+  uint64 id = 2;
+}
+
+message DataOfJoin {
+  string name = 1;
+  uint64 id = 2;
+}

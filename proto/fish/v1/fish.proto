@@ -1,0 +1,612 @@
+syntax = "proto3";
+
+package blood.v1;
+option go_package = "github.com/xxy/blood_game/proto/blood/v1;v1";
+
+// 结构定义
+enum GameStatus {
+  GameStatus_None = 0  ;
+  Ready = 1 ;  // 准备阶段
+  Showing = 2 ;  // 准备阶段
+  Playing = 3 ;  // 游戏中
+  Pause = 4 ;   // 暂停阶段
+  Settlement = 5 ;  // 结算阶段
+  Over = 6 ; // 结算阶段
+}
+
+
+message ItemInfo {
+	// 物品ID 为 818181固定 | @inject_tag: msgpack:"itemId" json:"itemId"
+	int32 itemId = 1 ;
+	// 数量 | @inject_tag: msgpack:"num" json:"num"
+	int32 num = 2 ;
+}
+
+// 波次信息
+message RoundInfo {
+	// 波次 | @inject_tag: msgpack:"roundId" json:"roundId"
+	int32 roundId = 1 ; 
+	// 未拾取的兑换币 | @inject_tag: msgpack:"StroageCoins" json:"StroageCoins"
+	int32 StroageCoins = 2 ;  
+	// 难度 | @inject_tag: msgpack:"levelId" json:"levelId"
+	int32 levelId = 3 ; 
+	// 最高记录 | @inject_tag: msgpack:"highRecord" json:"highRecord"
+	int32 highRecord = 4 ; 
+	// Pvp 波次时间 | @inject_tag: msgpack:"roundStartTime" json:"roundStartTime"
+	int64 roundStartTime = 5 ;
+	// Pvp 波次有效时间 | @inject_tag: msgpack:"roundExpire" json:"roundExpire"
+	int32 roundExpire = 6 ;
+	// 波次 | @inject_tag: msgpack:"roundCount" json:"roundCount"
+	int32 roundCount = 7 ;
+}
+// 捡去怪物掉落的商店兑换的金币
+message ScDropCoin{
+	// 金币数量 | @inject_tag: msgpack:"coinNum" json:"coinNum"
+	int32 coinNum = 1 ;
+	// x | @inject_tag: msgpack:"posX" json:"posX"
+	int32 posX = 2 ;
+	// y | @inject_tag: msgpack:"posY" json:"posY"
+	int32 posY = 3 ;
+}
+
+
+message EffectInfo {
+	// 特效ID | @inject_tag: msgpack:"EffectId" json:"EffectId"
+	int32 EffectId = 1 ; 
+	// 特效产生的数值 | @inject_tag: msgpack:"EffectVal" json:"EffectVal"
+	int32 EffectVal = 2 ;
+}
+
+message SkillInfo {
+	// 技能Id | @inject_tag: msgpack:"SkillId" json:"SkillId"
+	int32 SkillId = 1 ; 
+	// 特效的列表 | @inject_tag: msgpack:"EffectInfos" json:"EffectInfos"
+	repeated EffectInfo EffectInfos = 2 ; 
+	// 技能操作 | @inject_tag: msgpack:"isAuto" json:"isAuto"
+	bool  isAuto = 3 ; //false 为被动技能 true 为主动技能
+}
+// 技能类型
+enum SkillType {
+	SkillType_All = 0 ; // 群体攻击
+	SkillType_Single = 1 ; // 单体攻击
+}
+
+// 技能特效信息
+message SkillEffectInfo {
+	// 配置ID | @inject_tag: msgpack:"effectId" json:"effectId"
+	int32 effectId = 1 ; 	// 配置ID
+	// 节能类型 | @inject_tag: msgpack:"skillType" json:"skillType"
+	SkillType skillType = 2 ;  // 技能类型
+	// 伤害的值 | @inject_tag: msgpack:"effectVal" json:"effectVal"
+	int32 effectVal = 3 ;   // 伤害的值
+	// 受影响的ID | @inject_tag: msgpack:"affectorId" json:"affectorId"
+	int32 affectorId = 4; 	// 受影响的ID
+	// 技能发起者 | @inject_tag: msgpack:"effectCreator" json:"effectCreator"
+	int32 effectCreator = 7 ; 
+	// 技能Id | @inject_tag: msgpack:"skillId" json:"skillId"
+	int32 skillId = 8 ; 
+	//  effect 起效时间 | @inject_tag: msgpack:"effectStartTime" json:"effectStartTime"
+	int64 effectStartTime = 9 ; // effectbuf 起效时间
+	// effect 有效时间 | @inject_tag: msgpack:"effectExpire" json:"effectExpire"
+	int32 effectExpire = 10 ; // effectbuf 有效时间
+	// 溅射伤害的值 | @inject_tag: msgpack:"effectVal1" json:"effectVal1"
+	int32	effectVal1    = 11 ;  // 溅射伤害的值
+	// 溅射受影响的ID | @inject_tag: msgpack:"affectorId1" json:"affectorId1"
+	int32 affectorId1   =12 ;  // 溅射受影响的ID	
+}
+// buff 类型
+enum BuffType {
+	BuffHP             = 0 ;// 生命值
+	BuffBackHP         = 1 ;// 每秒回血
+	BuffLifeSteal      = 2 ;// 生命窃取
+	BuffAddAttack      = 3 ;// 增加攻击
+	BuffAddDefense     = 4 ;// 增加防御
+	BuffCrit           = 5 ;// 暴击率
+	BuffAttackSpeed    = 6 ;// 攻击速度
+	BuffAttackRange    = 7 ;// 攻击范围
+	BuffSpeed          = 8 ;// 移动速度
+	BuffCollectRange   = 9 ;// 拾取范围
+	BuffPenetration    = 10;// 贯穿
+	BuffAttackBack     = 11;// 击退
+	BuffRebound        = 12;// 反弹
+	BuffSkillCD        = 13;// 技能CD
+	BuffMoveCond       = 14;// 移动条件
+	BuffBloodCond      = 15;// 鲜血条件
+	BuffAssetBack      = 16;// 资源回收
+	BuffLucky          = 17;// 幸运值
+	BuffBack           = 18;// 回收
+	BuffEnemySpeed     = 19;// 敌人速度
+	BuffItemPrice      = 20;// 道具价格
+	BuffDeadDamage     = 21;// 死亡伤害
+	BuffAttachDamage   = 22;// 附加伤害
+	BuffCollectDamage  = 23;// 拾取伤害
+	BuffCollectResume  = 24;// 拾取回复
+	BuffDeadResume     = 25;// 死亡恢复
+	BuffChangeBlood    = 26;// 换血
+	BuffMoveDamage     = 27;// 移动伤害
+}
+
+// 技能能BUF信息
+message SkillBuffInfo {
+	// buff 配置ID | @inject_tag: msgpack:"buffId" json:"buffId"
+	int32 buffId = 1 ;  // buff 配置ID
+	//  buff 起效时间 | @inject_tag: msgpack:"BuffStartTime" json:"BuffStartTime"
+	int64 BuffStartTime = 2 ; // buff 起效时间
+	// buff 有效时间 | @inject_tag: msgpack:"BuffExpire" json:"BuffExpire"
+	int32 BuffExpire = 3 ; // buff 有效时间
+	// buff 受影响的ID | @inject_tag: msgpack:"affectorId" json:"affectorId"
+	int32 affectorId = 4 ; // buff 受影响的ID
+	// buff 值 | @inject_tag: msgpack:"bufVal" json:"bufVal"
+	int32 bufVal = 5 ;   // buff 值
+	// buff 类型 | @inject_tag: msgpack:"bufType" json:"bufType"
+	BuffType bufType = 6 ;  // buff 类型
+	// buff 发起者 | @inject_tag: msgpack:"buffCreator" json:"buffCreator"
+	int32 buffCreator = 7 ; 
+	// 技能Id | @inject_tag: msgpack:"skillId" json:"skillId"
+	int32 skillId = 8 ; 
+}
+
+
+enum LiveStatus {
+	LiveStatus_None = 0; //
+	Live = 1; // 正常状态
+	Dead = 2; // 死亡
+}
+
+// 玩家属性列表
+message AttrInfo {
+	// 玩家属性ID 也就是能力表的ID | @inject_tag: msgpack:"attributeId" json:"attributeId"
+	int32 attributeId = 1 ; 
+	// 属性最终值 | @inject_tag: msgpack:"val" json:"val"
+	int32 val = 2 ; 
+}
+
+// 玩家解锁的能力
+message AbilityInfo {
+	// 能力ID | @inject_tag: msgpack:"abilityId" json:"abilityId"
+	int32 abilityId = 1 ; 
+	// 数量 | @inject_tag: msgpack:"num" json:"num"
+	int32 num = 2 ; 
+}
+
+// buff 特效
+message BuffEffectData {
+	// 目标ID 唯一 | @inject_tag: msgpack:"targetId" json:"targetId"
+	int32 targetId = 1 ; 
+	// 特效 | @inject_tag: msgpack:"effectInfo" json:"effectInfo"
+	EffectInfo effectInfo = 2 ; 
+}
+
+message Pos {
+	// 坐标 X| @inject_tag: msgpack:"posX" json:"posX"
+	int32 posX = 1 ;
+	// 坐标 Y | @inject_tag: msgpack:"posY" json:"posY"
+	int32 posY = 2 ;
+	// 方向 | @inject_tag: msgpack:"Orientation" json:"Orientation"
+	int32 Orientation = 3;
+	// ID 唯一| @inject_tag: msgpack:"Id" json:"Id"
+	int32 Id = 4 ;
+}
+
+message PlayerInfo {
+	// 玩家坐标位置 | @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ;
+	// 属性 | @inject_tag: msgpack:"attrInfos" json:"attrInfos"
+	repeated AttrInfo attrInfos = 2 ;
+	// 血量 | @inject_tag: msgpack:"HP" json:"HP"
+	int32 HP = 3 ;
+	// 等级 | @inject_tag: msgpack:"level" json:"level"
+	int32 level = 4 ;
+	// 攻击 | @inject_tag: msgpack:"attack" json:"attack"
+	int32 attack = 5;
+	// 防御 | @inject_tag: msgpack:"defense" json:"defense"
+	int32 defense = 6 ;
+	// 速度 | @inject_tag: msgpack:"speed" json:"speed"
+	int32 speed = 7 ;
+	// 技能列表 | @inject_tag: msgpack:"skillInfos" json:"skillInfos"
+	repeated SkillInfo skillInfos = 8 ;
+	// 存活状态 | @inject_tag: msgpack:"status" json:"status"
+	LiveStatus status = 9;
+	// 玩家配置ID | @inject_tag: msgpack:"configId" json:"configId"
+	int32 configId  = 10 ;
+	// 复活时间PVP用 | @inject_tag: msgpack:"surviceStarttime" json:"surviceStarttime"
+	int64 surviceStarttime = 11 ;
+	// 复活时间CD时间| @inject_tag: msgpack:"surviceCD" json:"surviceCD"
+	int32 surviceCD = 12 ;
+	// 能力buf列表| @inject_tag: msgpack:"abilityInfos" json:"abilityInfos"
+	repeated AbilityInfo abilityInfos = 13 ;
+	// Coin| @inject_tag: msgpack:"coin" json:"coin"
+	int32 coin = 14;
+}
+
+message PVPSimplePlayerInfo {
+	// 玩家坐标位置 | @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ;
+	// 血量 | @inject_tag: msgpack:"HP" json:"HP"
+	int32 HP = 2 ;
+	// 存活状态 | @inject_tag: msgpack:"status" json:"status"
+	LiveStatus status = 3;
+	// 复活时间PVP用 | @inject_tag: msgpack:"surviceStarttime" json:"surviceStarttime"
+	int64 surviceStarttime = 4 ;
+	// 复活时间CD时间| @inject_tag: msgpack:"surviceCD" json:"surviceCD"
+	int32 surviceCD = 5 ;
+}
+
+message PVESimplePlayerInfo {
+	// 玩家坐标位置 | @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ;
+	// 血量 | @inject_tag: msgpack:"HP" json:"HP"
+	int32 HP = 2 ;
+	// 存活状态 | @inject_tag: msgpack:"status" json:"status"
+	LiveStatus status = 3;
+}
+
+message RobotInfo {
+	// 机器人位置 | @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ; 
+	// 血量 | @inject_tag: msgpack:"HP" json:"HP"
+	int32 HP = 2 ;
+	// 攻击 | @inject_tag: msgpack:"attack" json:"attack"
+	int32 attack = 3 ;
+	// 防御 | @inject_tag: msgpack:"defense" json:"defense"
+	int32 defense = 4 ;
+	// 速度 | @inject_tag: msgpack:"speed" json:"speed"
+	int32 speed = 5 ;
+	// 技能列表 | @inject_tag: msgpack:"skillInfos" json:"skillInfos"
+	repeated  SkillInfo skillInfos = 6 ;
+	// 掉落包 | @inject_tag: msgpack:"dropIds" json:"dropIds"
+	repeated int32 dropIds = 7 ;
+	// 存活状态 | @inject_tag: msgpack:"status" json:"status"
+	LiveStatus status = 10;
+	// 目标玩家的ID | @inject_tag: msgpack:"targetId" json:"targetId"
+	int32   targetId = 11 ; 
+	// 机器人配置ID 根据这个可以算预演 | @inject_tag: msgpack:"robotId" json:"robotId"
+	int32   robotId = 12 ; 
+}
+
+message SimpleRobotInfo {
+	// 机器人位置 | @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ; 
+	// 血量 | @inject_tag: msgpack:"HP" json:"HP"
+	int32 HP = 2 ;
+	// 存活状态 | @inject_tag: msgpack:"status" json:"status"
+	LiveStatus status = 3;
+}
+
+
+enum OverType{
+	OverType_None = 0 ;
+	LiveTime = 1 ;  // 存活时间
+	KillNum = 2 ;   // 击杀数量
+	Demange = 3 ;   // 每秒伤害
+}
+
+message OverInfo {
+	// 结算类型 | @inject_tag: msgpack:"oType" json:"oType"
+	OverType oType = 1 ;
+	// num | @inject_tag: msgpack:"num" json:"num"
+	int32 num = 2 ;
+	// 百分比 | @inject_tag: msgpack:"percent" json:"percent"
+	int32 percent = 3 ;
+}
+
+message GameOverInfo {
+	// 结束波次 | @inject_tag: msgpack:"roundId" json:"roundId"
+	int32 roundId = 1 ;
+	// 最高记录 | @inject_tag: msgpack:"highRoundId" json:"highRoundId"
+	int32 highRoundId = 2 ;
+	// 物品信息 | @inject_tag: msgpack:"itemInfos" json:"itemInfos"
+	ItemInfo itemInfos = 3 ;
+	// 显示记录 | @inject_tag: msgpack:"overInfos" json:"overInfos"
+	repeated OverInfo overInfos = 4;
+	// 输赢状态 | @inject_tag: msgpack:"status" json:"status"
+	int32 status = 5 ;  // 0 - 失败 1 - 胜利
+	// 奖励信息 | @inject_tag: msgpack:"rewardInfos" json:"rewardInfos"
+	repeated RewardInfo rewardInfos = 6 ;
+	// 失败扣除的信息 | @inject_tag: msgpack:"lostRewardInfos" json:"lostRewardInfos"
+	repeated RewardInfo lostRewardInfos = 7 ;
+}
+
+message RespGameInfo {
+	// 是否需要发csload | @inject_tag: msgpack:"code" json:"code"
+	int32 code  = 1 ;  // 0 -不需要发 1 - 表示需要发 csload
+	int32 playerId = 2 ; //
+}
+
+///// 消息定义
+
+// 玩家加载资源
+message CsLoad{
+	
+}
+
+// 回复确认玩家
+message ScLoad{
+}
+
+// 广播操作
+message SyncLoad{
+}
+
+message ScStartGame {
+	// 游戏困难等级 | @inject_tag: msgpack:"levelId" json:"levelId"
+	int32 levelId = 1 ;
+	// 波次信息 | @inject_tag: msgpack:"roundInfo" json:"roundInfo"
+	RoundInfo roundInfo = 2;
+}
+
+message ScPlayStatus{
+	// 游戏状态 | @inject_tag: msgpack:"status" json:"status"
+	GameStatus status = 1 ;
+	// 剩余时间 | @inject_tag: msgpack:"suplusTime" json:"suplusTime"
+	int32 suplusTime = 2 ;
+}
+
+// 推送玩家消息
+message ScPlayerInfo {
+	// 玩家信息 | @inject_tag: msgpack:"PlayerInfos" json:"PlayerInfos"
+	repeated PlayerInfo PlayerInfos = 1 ;
+}
+
+message ScPveSimplePlayerInfo {
+	// 玩家信息 | @inject_tag: msgpack:"pveSimplePlayerInfo" json:"pveSimplePlayerInfo"
+	PVESimplePlayerInfo pveSimplePlayerInfo = 1 ; 
+}
+
+message ScPvpSimplePlayerInfo {
+	// 玩家信息 | @inject_tag: msgpack:"pvpSimplePlayerInfo" json:"pvpSimplePlayerInfo"
+	PVPSimplePlayerInfo pvpSimplePlayerInfo = 1 ; 
+}
+
+// 推送机器人的消息
+message ScRobotInfo {
+	// 机器人信息 | @inject_tag: msgpack:"RobotInfos" json:"RobotInfos"
+	repeated RobotInfo RobotInfos = 1 ;
+}
+
+message ScSimpleRobotInfo {
+	// 机器人信息 | @inject_tag: msgpack:"simpleRobotInfo" json:"simpleRobotInfo"
+	SimpleRobotInfo simpleRobotInfo = 1 ;
+}
+
+// 移动
+message CsMove {
+	// 玩家移动 | @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ;
+}
+// 同步移动
+message ScMove {
+	// 所有位置 | @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ;
+}
+
+message CsOperate {
+	// 操作技能ID | @inject_tag: msgpack:"skillId" json:"skillId"
+	uint32 skillId = 1 ;
+	// 目标ID | @inject_tag: msgpack:"targetId" json:"targetId"
+	int32 targetId = 2 ;
+}
+
+message ScOperate {
+	// 操作技能ID | @inject_tag: msgpack:"skillId" json:"skillId"
+	uint32 skillId = 1 ;
+	// 目标ID | @inject_tag: msgpack:"targetId" json:"targetId"
+	int32 targetId = 2 ;
+}
+
+// 同步buf
+message ScBuffInfo {
+	// buff特效 | @inject_tag: msgpack:"EffectData" json:"EffectData"
+	repeated BuffEffectData EffectData = 1 ;
+}
+
+// 同步技能特效伤害
+message ScSkillEffectInfo {
+	// 技能特效的伤害 | @inject_tag: msgpack:"skillEffectInfos" json:"skillEffectInfos"
+	repeated SkillEffectInfo skillEffectInfos = 1;	
+}
+// 同步技能BUff
+message ScSkillBuffInfo {
+	// buff特效 | @inject_tag: msgpack:"skillBuffInfos" json:"skillBuffInfos"
+	repeated SkillBuffInfo skillBuffInfos = 1;
+}
+
+// 同步波次掉落的Buff
+message ScRoundBuffInfo {
+	// buff特效 | @inject_tag: msgpack:"skillBuffInfos" json:"skillBuffInfos"
+	repeated SkillBuffInfo skillBuffInfos = 1;
+}
+
+// 同步能力购买的Buff
+message ScAbilityBuffInfo {
+	// buff特效 | @inject_tag: msgpack:"skillBuffInfos" json:"skillBuffInfos"
+	repeated SkillBuffInfo abilityBuffInfos = 1;
+}
+
+
+message  ScGameOverInfo {
+	// 结束信息 | @inject_tag: msgpack:"gameOverInfo" json:"gameOverInfo"
+	GameOverInfo gameOverInfo = 1 ;
+}
+
+////////
+
+message RobotDropInfo {
+	// 怪物掉落位置 ID 为 818181固定| @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ;
+	// 怪物掉落数量 | @inject_tag: msgpack:"num" json:"num"
+	int32 num = 2 ;
+}
+
+message ScRobotDropInfo {
+	// 所有掉落的信息 | @inject_tag: msgpack:"robotDropInfos" json:"robotDropInfos"
+	repeated RobotDropInfo robotDropInfos = 1 ;
+}
+//===================================商店操作
+// 商店波次信息
+message ShopInfo {
+	// 配置表SHOP ID | @inject_tag: msgpack:"shopId" json:"shopId"
+	int32 shopId = 1 ;
+	// 能力abilityBufId | @inject_tag: msgpack:"abilityBufId" json:"abilityBufId"
+	int32 abilityBufId = 2 ; //能力ID
+	// 是否为广告 | @inject_tag: msgpack:"isAdvertise" json:"isAdvertise"
+	bool isAdvertise = 3 ;
+	// 价格 | @inject_tag: msgpack:"price" json:"price"
+	int32 price = 4 ;	
+	// 锁定 | @inject_tag: msgpack:"isLock" json:"isLock"
+	bool isLock = 5 ;	
+}
+
+message ScShopInfo {
+	// 商店信息 | @inject_tag: msgpack:"shopInfos" json:"shopInfos"
+	repeated ShopInfo shopInfos = 1 ;
+}
+
+// 购买能力增加能力属性
+message CsBuyAbility {
+	// 锁定下标 | @inject_tag: msgpack:"indexId" json:"indexId"
+	int32 indexId = 1 ;
+}
+
+message ShopBuyPlayerInfo {
+	// 锁定下标 | @inject_tag: msgpack:"indexId" json:"indexId"
+	int32 indexId = 1 ;
+	// 兑换币 | @inject_tag: msgpack:"coinNum" json:"coinNum"
+	int32 coinNum  = 2 ; 
+}
+
+// 锁定 取消操作
+message CsLockAndUnLockAbility {
+	// 锁定下标 | @inject_tag: msgpack:"indexId" json:"indexId"
+	int32 indexId = 1 ; //
+}
+
+
+// 推送属性列表
+message ScAttrInfos {
+	// 属性列表 | @inject_tag: msgpack:"attrInfos" json:"attrInfos"
+	repeated AttrInfo attrInfos = 1 ;
+}
+
+// 推送玩家能力列表
+message ScAbilityInfos {
+	// 能力列表 | @inject_tag: msgpack:"abilityInfos" json:"abilityInfos"
+	repeated AbilityInfo abilityInfos = 1 ;
+}
+
+// 刷新列表 会推送 scShopInfo
+message CsRefreshAbilityInfo {
+	// 刷新列表的下标ID | @inject_tag: msgpack:"indexIds" json:"indexIds"
+	repeated int32 indexIds = 1 ;
+}
+
+//////////////奖励类型
+enum RewardType {
+	GP = 0 ;  //GP
+	MoonRune = 1 ; //    月光符文
+	OasisRune = 2 ;// 绿洲符文
+	IceRune = 3 ;// 冰霜符文
+	LightRune = 4 ;// 流光符文
+	StarRune = 5 ; //星空符文
+	ThunderRune = 6 ; //雷霆符文
+	HotRune = 7 ;// 赤炎符文
+	PSRune = 8 ; //体力
+}
+
+message RewardInfo {
+	// 奖励类型 | @inject_tag: msgpack:"rewardType" json:"rewardType"
+	RewardType rewardType = 1 ;
+	// 奖励数量 | @inject_tag: msgpack:"num" json:"num"
+	int32 num = 2 ;
+}
+
+message ScRewardInfo {
+	// 奖励信息 | @inject_tag: msgpack:"rewardInfos" json:"rewardInfos"
+	repeated RewardInfo rewardInfos = 1 ;
+}
+
+// 商店 波次弹窗 信息
+message ScShopRoundInfos{
+	// 波次信息 | @inject_tag: msgpack:"roundInfo" json:"roundInfo"
+	RoundInfo roundInfo = 1 ;
+}
+
+////////
+
+message ScRoundDropInfo {
+	// 波次掉落Item的Id | @inject_tag: msgpack:"roundDropId" json:"roundDropId"
+	int32 roundDropId = 1 ;
+	// 波次掉落数量 | @inject_tag: msgpack:"num" json:"num"
+	int32 num = 2 ;
+	// 掉落识别的唯一ID | @inject_tag: msgpack:"unquieId" json:"unquieId"
+	int32 unquieId  = 3 ;	
+}
+
+message ScRoundDropPosInfo {
+	// 掉落识别的位置 | @inject_tag: msgpack:"pos" json:"pos"
+	Pos pos = 1 ;
+}
+
+message ScGetRoundDropInfo {
+	// 掉落识别的唯一ID | @inject_tag: msgpack:"unquieId" json:"unquieId"
+	int32 unquieId  = 1 ;
+}
+
+// 普通波次商店购买后继续
+message CsGameContinue{
+}
+
+// 结算波次 放弃操作
+message CsAbortGame {
+}
+
+message CsGetReward {
+	// 领取类型 | @inject_tag: msgpack:"RewardType" json:"RewardType"
+	int32 RewardType = 1 ; // 0 - 领取  1 - 看广告领取
+}
+
+
+
+
+/////////////////////////////////////////////////////pvp
+
+message PvpRankInfo {
+	// 玩家ID | @inject_tag: msgpack:"playerId" json:"playerId"
+	int32 playerId = 1 ;
+	// 分数 | @inject_tag: msgpack:"score" json:"score"
+	int32 score = 2 ;
+	// 排名 | @inject_tag: msgpack:"rankNo" json:"rankNo"
+	int32 rankNo = 3 ;
+}
+
+message ScPvpRank {
+	// 排行类型 | @inject_tag: msgpack:"rankInfos" json:"rankInfos"
+	repeated PvpRankInfo rankInfos = 1;
+}
+
+message PvpGameOverInfo{
+	// 玩家ID | @inject_tag: msgpack:"playerId" json:"playerId"
+	int32 playerId = 1 ;
+	// 分数 | @inject_tag: msgpack:"score" json:"score"
+	int32 score = 2 ;
+	// 排名 | @inject_tag: msgpack:"rankNo" json:"rankNo"
+	int32 rankNo = 3 ;
+	// boss积分 | @inject_tag: msgpack:"bossScore" json:"bossScore"
+	int32 bossScore = 4 ;
+	// 怪物积分 | @inject_tag: msgpack:"monsterScore" json:"monsterScore"
+	int32 monsterScore = 5 ;
+}
+
+message ScPvpGameOver{
+	// 怪物积分 | @inject_tag: msgpack:"gameOverInfos" json:"gameOverInfos"
+	repeated  PvpGameOverInfo gameOverInfos = 1 ;
+}
+
+// 离开,推出游戏
+message CsLeaveGame {
+}
+
+message CsCleanScreen {
+	// 清屏 | @inject_tag: msgpack:"robotIds" json:"robotIds"
+	repeated int32 robotIds = 1 ;
+}
