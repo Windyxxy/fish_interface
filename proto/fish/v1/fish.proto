@@ -18,7 +18,7 @@ message ScGameStatus {
 	// 时间戳 | @inject_tag: msgpack:"startTime" json:"startTime"
 	int64	startTime = 2 ;
 	// 剩余时间 | @inject_tag: msgpack:"suplus" json:"suplus"
-	int32   suplus   = 3 ;
+	int32   suplusTime   = 3 ;
 }
 
 // 进度加载
@@ -56,12 +56,10 @@ message PlayerInfo {
 	int32 combo = 4;
 	// 力度 | @inject_tag: msgpack:"strength" json:"strength"
 	int32 strength = 5 ; 
-	// 技能CD | @inject_tag: msgpack:"skillCD" json:"skillCD"
-	int32 skillCD = 6;	
 	// 技能ID | @inject_tag: msgpack:"skillId" json:"skillId"
-	int32 skillId = 7;	
+	int32 skillId = 6;	
 	// 玩家类型 | @inject_tag: msgpack:"playerType" json:"playerType"
-	PlayerType playerType = 8 ;
+	PlayerType playerType = 7 ;
 }
 
 message ScPlayerInfos {
@@ -108,9 +106,23 @@ message ScBuffInfo {
 
 // 鱼塘信息
 message FishPondInfo {
+	// posX | @inject_tag: msgpack:"posX" json:"posX"
 	int32 posX = 1 ;
+	// posY | @inject_tag: msgpack:"posY" json:"posY"
 	int32 posY = 2 ;
+	// 鱼塘半径 | @inject_tag: msgpack:"radius" json:"radius"
 	int32 radius = 3 ; 
+}
+
+message FishGroupInfo {
+	// 鱼组 | @inject_tag: msgpack:"groupId" json:"groupId"
+	int32 groupId = 1 ;
+	// 间隔时间 | @inject_tag: msgpack:"gapTime" json:"gapTime"
+	int32 gapTime = 3 ;
+	// 汇聚时间 | @inject_tag: msgpack:"gatherTime" json:"gatherTime"
+	int32 gatherTime = 4;
+	// 鱼信息 | @inject_tag: msgpack:"fishInfos" json:"fishInfos"
+	repeated FishInfo fishInfos = 5 ;
 }
 
 // 鱼的信息
@@ -134,8 +146,8 @@ message ScGameStart {
 }
 
 message ScFishSceneInfo {
-	// 鱼池Id | @inject_tag: msgpack:"fishInfos" json:"fishInfos"
-	repeated FishInfo fishInfos = 1 ;
+	// 鱼池Id | @inject_tag: msgpack:"fishGroupInfos" json:"fishGroupInfos"
+	repeated FishGroupInfo fishGroupInfos = 1 ;
 	// 鱼塘 | @inject_tag: msgpack:"fisnPondInfo" json:"fisnPondInfo"
 	FishPondInfo fisnPondInfo = 2 ;
 }
