@@ -93,6 +93,8 @@ message DataOfJoin {
   int32 num = 10;
     // 游戏挡位 | @inject_tag: msgpack:"level" json:"level"
   int32 level = 11;
+  // 适配的最大坐标 | @inject_tag: msgpack:"posY" json:"posY"
+  int32 posY = 12  ; 
 }
 
 
