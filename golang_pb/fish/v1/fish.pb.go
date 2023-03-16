@@ -426,6 +426,62 @@ func (*SyncLoad) Descriptor() ([]byte, []int) {
 	return file_fish_proto_rawDescGZIP(), []int{3}
 }
 
+type RespGameInfo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 是否需要发csload | @inject_tag: msgpack:"code" json:"code"
+	Code     int32 `protobuf:"varint,1,opt,name=code,proto3" json:"code" msgpack:"code"`         // 0 -不需要发 1 - 表示需要发 csload
+	PlayerId int32 `protobuf:"varint,2,opt,name=playerId,proto3" json:"playerId,omitempty"` //
+}
+
+func (x *RespGameInfo) Reset() {
+	*x = RespGameInfo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fish_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RespGameInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RespGameInfo) ProtoMessage() {}
+
+func (x *RespGameInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_fish_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RespGameInfo.ProtoReflect.Descriptor instead.
+func (*RespGameInfo) Descriptor() ([]byte, []int) {
+	return file_fish_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RespGameInfo) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *RespGameInfo) GetPlayerId() int32 {
+	if x != nil {
+		return x.PlayerId
+	}
+	return 0
+}
+
 type PlayerInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -452,7 +508,7 @@ type PlayerInfo struct {
 func (x *PlayerInfo) Reset() {
 	*x = PlayerInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[4]
+		mi := &file_fish_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -465,7 +521,7 @@ func (x *PlayerInfo) String() string {
 func (*PlayerInfo) ProtoMessage() {}
 
 func (x *PlayerInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[4]
+	mi := &file_fish_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -478,7 +534,7 @@ func (x *PlayerInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerInfo.ProtoReflect.Descriptor instead.
 func (*PlayerInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{4}
+	return file_fish_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *PlayerInfo) GetAccountId() int32 {
@@ -549,7 +605,7 @@ type ScPlayerInfos struct {
 func (x *ScPlayerInfos) Reset() {
 	*x = ScPlayerInfos{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[5]
+		mi := &file_fish_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -562,7 +618,7 @@ func (x *ScPlayerInfos) String() string {
 func (*ScPlayerInfos) ProtoMessage() {}
 
 func (x *ScPlayerInfos) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[5]
+	mi := &file_fish_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -575,7 +631,7 @@ func (x *ScPlayerInfos) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScPlayerInfos.ProtoReflect.Descriptor instead.
 func (*ScPlayerInfos) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{5}
+	return file_fish_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ScPlayerInfos) GetPlayerInfos() []*PlayerInfo {
@@ -612,7 +668,7 @@ type BuffInfo struct {
 func (x *BuffInfo) Reset() {
 	*x = BuffInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[6]
+		mi := &file_fish_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -625,7 +681,7 @@ func (x *BuffInfo) String() string {
 func (*BuffInfo) ProtoMessage() {}
 
 func (x *BuffInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[6]
+	mi := &file_fish_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -638,7 +694,7 @@ func (x *BuffInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BuffInfo.ProtoReflect.Descriptor instead.
 func (*BuffInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{6}
+	return file_fish_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *BuffInfo) GetBuffId() int32 {
@@ -712,7 +768,7 @@ type ScBuffInfo struct {
 func (x *ScBuffInfo) Reset() {
 	*x = ScBuffInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[7]
+		mi := &file_fish_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -725,7 +781,7 @@ func (x *ScBuffInfo) String() string {
 func (*ScBuffInfo) ProtoMessage() {}
 
 func (x *ScBuffInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[7]
+	mi := &file_fish_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -738,7 +794,7 @@ func (x *ScBuffInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScBuffInfo.ProtoReflect.Descriptor instead.
 func (*ScBuffInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{7}
+	return file_fish_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ScBuffInfo) GetBuffInfos() []*BuffInfo {
@@ -769,7 +825,7 @@ type FishPondInfo struct {
 func (x *FishPondInfo) Reset() {
 	*x = FishPondInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[8]
+		mi := &file_fish_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -782,7 +838,7 @@ func (x *FishPondInfo) String() string {
 func (*FishPondInfo) ProtoMessage() {}
 
 func (x *FishPondInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[8]
+	mi := &file_fish_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -795,7 +851,7 @@ func (x *FishPondInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FishPondInfo.ProtoReflect.Descriptor instead.
 func (*FishPondInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{8}
+	return file_fish_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *FishPondInfo) GetPosX() int32 {
@@ -838,7 +894,7 @@ type FishInfo struct {
 func (x *FishInfo) Reset() {
 	*x = FishInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[9]
+		mi := &file_fish_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -851,7 +907,7 @@ func (x *FishInfo) String() string {
 func (*FishInfo) ProtoMessage() {}
 
 func (x *FishInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[9]
+	mi := &file_fish_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -864,7 +920,7 @@ func (x *FishInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FishInfo.ProtoReflect.Descriptor instead.
 func (*FishInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{9}
+	return file_fish_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *FishInfo) GetFishId() int32 {
@@ -910,7 +966,7 @@ type ScGameStart struct {
 func (x *ScGameStart) Reset() {
 	*x = ScGameStart{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[10]
+		mi := &file_fish_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -923,7 +979,7 @@ func (x *ScGameStart) String() string {
 func (*ScGameStart) ProtoMessage() {}
 
 func (x *ScGameStart) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[10]
+	mi := &file_fish_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -936,7 +992,7 @@ func (x *ScGameStart) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScGameStart.ProtoReflect.Descriptor instead.
 func (*ScGameStart) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{10}
+	return file_fish_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ScGameStart) GetGameStartTime() int64 {
@@ -967,7 +1023,7 @@ type ScFishSceneInfo struct {
 func (x *ScFishSceneInfo) Reset() {
 	*x = ScFishSceneInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[11]
+		mi := &file_fish_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -980,7 +1036,7 @@ func (x *ScFishSceneInfo) String() string {
 func (*ScFishSceneInfo) ProtoMessage() {}
 
 func (x *ScFishSceneInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[11]
+	mi := &file_fish_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -993,7 +1049,7 @@ func (x *ScFishSceneInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScFishSceneInfo.ProtoReflect.Descriptor instead.
 func (*ScFishSceneInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{11}
+	return file_fish_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ScFishSceneInfo) GetFishInfos() []*FishInfo {
@@ -1023,7 +1079,7 @@ type CsFish struct {
 func (x *CsFish) Reset() {
 	*x = CsFish{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[12]
+		mi := &file_fish_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1036,7 +1092,7 @@ func (x *CsFish) String() string {
 func (*CsFish) ProtoMessage() {}
 
 func (x *CsFish) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[12]
+	mi := &file_fish_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1049,7 +1105,7 @@ func (x *CsFish) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CsFish.ProtoReflect.Descriptor instead.
 func (*CsFish) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{12}
+	return file_fish_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CsFish) GetStrength() int32 {
@@ -1075,7 +1131,7 @@ type CatchFishInfo struct {
 func (x *CatchFishInfo) Reset() {
 	*x = CatchFishInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[13]
+		mi := &file_fish_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1088,7 +1144,7 @@ func (x *CatchFishInfo) String() string {
 func (*CatchFishInfo) ProtoMessage() {}
 
 func (x *CatchFishInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[13]
+	mi := &file_fish_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1101,7 +1157,7 @@ func (x *CatchFishInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CatchFishInfo.ProtoReflect.Descriptor instead.
 func (*CatchFishInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{13}
+	return file_fish_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CatchFishInfo) GetFishId() int32 {
@@ -1137,7 +1193,7 @@ type ScFish struct {
 func (x *ScFish) Reset() {
 	*x = ScFish{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[14]
+		mi := &file_fish_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1150,7 +1206,7 @@ func (x *ScFish) String() string {
 func (*ScFish) ProtoMessage() {}
 
 func (x *ScFish) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[14]
+	mi := &file_fish_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1163,7 +1219,7 @@ func (x *ScFish) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScFish.ProtoReflect.Descriptor instead.
 func (*ScFish) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{14}
+	return file_fish_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ScFish) GetCatchFishInfos() []*CatchFishInfo {
@@ -1186,7 +1242,7 @@ type CsOperateSkill struct {
 func (x *CsOperateSkill) Reset() {
 	*x = CsOperateSkill{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[15]
+		mi := &file_fish_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1199,7 +1255,7 @@ func (x *CsOperateSkill) String() string {
 func (*CsOperateSkill) ProtoMessage() {}
 
 func (x *CsOperateSkill) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[15]
+	mi := &file_fish_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1212,7 +1268,7 @@ func (x *CsOperateSkill) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CsOperateSkill.ProtoReflect.Descriptor instead.
 func (*CsOperateSkill) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{15}
+	return file_fish_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CsOperateSkill) GetSkillId() int32 {
@@ -1234,7 +1290,7 @@ type CsOperateItem struct {
 func (x *CsOperateItem) Reset() {
 	*x = CsOperateItem{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[16]
+		mi := &file_fish_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1247,7 +1303,7 @@ func (x *CsOperateItem) String() string {
 func (*CsOperateItem) ProtoMessage() {}
 
 func (x *CsOperateItem) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[16]
+	mi := &file_fish_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1260,7 +1316,7 @@ func (x *CsOperateItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CsOperateItem.ProtoReflect.Descriptor instead.
 func (*CsOperateItem) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{16}
+	return file_fish_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CsOperateItem) GetSkillId() int32 {
@@ -1284,7 +1340,7 @@ type RewardInfo struct {
 func (x *RewardInfo) Reset() {
 	*x = RewardInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[17]
+		mi := &file_fish_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1297,7 +1353,7 @@ func (x *RewardInfo) String() string {
 func (*RewardInfo) ProtoMessage() {}
 
 func (x *RewardInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[17]
+	mi := &file_fish_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1310,7 +1366,7 @@ func (x *RewardInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RewardInfo.ProtoReflect.Descriptor instead.
 func (*RewardInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{17}
+	return file_fish_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RewardInfo) GetRewardType() RewardType {
@@ -1340,7 +1396,7 @@ type ScRewardInfo struct {
 func (x *ScRewardInfo) Reset() {
 	*x = ScRewardInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[18]
+		mi := &file_fish_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1353,7 +1409,7 @@ func (x *ScRewardInfo) String() string {
 func (*ScRewardInfo) ProtoMessage() {}
 
 func (x *ScRewardInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[18]
+	mi := &file_fish_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1366,7 +1422,7 @@ func (x *ScRewardInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScRewardInfo.ProtoReflect.Descriptor instead.
 func (*ScRewardInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{18}
+	return file_fish_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ScRewardInfo) GetRewardInfo() *RewardInfo {
@@ -1394,7 +1450,7 @@ type ScPveGameOverInfo struct {
 func (x *ScPveGameOverInfo) Reset() {
 	*x = ScPveGameOverInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[19]
+		mi := &file_fish_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1407,7 +1463,7 @@ func (x *ScPveGameOverInfo) String() string {
 func (*ScPveGameOverInfo) ProtoMessage() {}
 
 func (x *ScPveGameOverInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[19]
+	mi := &file_fish_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1420,7 +1476,7 @@ func (x *ScPveGameOverInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScPveGameOverInfo.ProtoReflect.Descriptor instead.
 func (*ScPveGameOverInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{19}
+	return file_fish_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ScPveGameOverInfo) GetFishInfos() []*FishInfo {
@@ -1467,7 +1523,7 @@ type PvpRankInfo struct {
 func (x *PvpRankInfo) Reset() {
 	*x = PvpRankInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[20]
+		mi := &file_fish_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1480,7 +1536,7 @@ func (x *PvpRankInfo) String() string {
 func (*PvpRankInfo) ProtoMessage() {}
 
 func (x *PvpRankInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[20]
+	mi := &file_fish_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1493,7 +1549,7 @@ func (x *PvpRankInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PvpRankInfo.ProtoReflect.Descriptor instead.
 func (*PvpRankInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{20}
+	return file_fish_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *PvpRankInfo) GetPlayerId() int32 {
@@ -1529,7 +1585,7 @@ type ScPvpRank struct {
 func (x *ScPvpRank) Reset() {
 	*x = ScPvpRank{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[21]
+		mi := &file_fish_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1542,7 +1598,7 @@ func (x *ScPvpRank) String() string {
 func (*ScPvpRank) ProtoMessage() {}
 
 func (x *ScPvpRank) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[21]
+	mi := &file_fish_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1555,7 +1611,7 @@ func (x *ScPvpRank) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScPvpRank.ProtoReflect.Descriptor instead.
 func (*ScPvpRank) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{21}
+	return file_fish_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ScPvpRank) GetRankInfos() []*PvpRankInfo {
@@ -1585,7 +1641,7 @@ type PvpGameOverInfo struct {
 func (x *PvpGameOverInfo) Reset() {
 	*x = PvpGameOverInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[22]
+		mi := &file_fish_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1598,7 +1654,7 @@ func (x *PvpGameOverInfo) String() string {
 func (*PvpGameOverInfo) ProtoMessage() {}
 
 func (x *PvpGameOverInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[22]
+	mi := &file_fish_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1611,7 +1667,7 @@ func (x *PvpGameOverInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PvpGameOverInfo.ProtoReflect.Descriptor instead.
 func (*PvpGameOverInfo) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{22}
+	return file_fish_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *PvpGameOverInfo) GetPlayerId() int32 {
@@ -1661,7 +1717,7 @@ type ScPvpGameOver struct {
 func (x *ScPvpGameOver) Reset() {
 	*x = ScPvpGameOver{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[23]
+		mi := &file_fish_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1674,7 +1730,7 @@ func (x *ScPvpGameOver) String() string {
 func (*ScPvpGameOver) ProtoMessage() {}
 
 func (x *ScPvpGameOver) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[23]
+	mi := &file_fish_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1687,7 +1743,7 @@ func (x *ScPvpGameOver) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScPvpGameOver.ProtoReflect.Descriptor instead.
 func (*ScPvpGameOver) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{23}
+	return file_fish_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ScPvpGameOver) GetGameOverInfos() []*PvpGameOverInfo {
@@ -1707,7 +1763,7 @@ type CsLeaveGame struct {
 func (x *CsLeaveGame) Reset() {
 	*x = CsLeaveGame{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fish_proto_msgTypes[24]
+		mi := &file_fish_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1720,7 +1776,7 @@ func (x *CsLeaveGame) String() string {
 func (*CsLeaveGame) ProtoMessage() {}
 
 func (x *CsLeaveGame) ProtoReflect() protoreflect.Message {
-	mi := &file_fish_proto_msgTypes[24]
+	mi := &file_fish_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1733,7 +1789,7 @@ func (x *CsLeaveGame) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CsLeaveGame.ProtoReflect.Descriptor instead.
 func (*CsLeaveGame) Descriptor() ([]byte, []int) {
-	return file_fish_proto_rawDescGZIP(), []int{24}
+	return file_fish_proto_rawDescGZIP(), []int{25}
 }
 
 var File_fish_proto protoreflect.FileDescriptor
@@ -1750,6 +1806,10 @@ var file_fish_proto_rawDesc = []byte{
 	0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x73, 0x75, 0x70, 0x6c, 0x75, 0x73,
 	0x22, 0x08, 0x0a, 0x06, 0x43, 0x73, 0x4c, 0x6f, 0x61, 0x64, 0x22, 0x08, 0x0a, 0x06, 0x53, 0x63,
 	0x4c, 0x6f, 0x61, 0x64, 0x22, 0x0a, 0x0a, 0x08, 0x53, 0x79, 0x6e, 0x63, 0x4c, 0x6f, 0x61, 0x64,
+	0x22, 0x3e, 0x0a, 0x0c, 0x52, 0x65, 0x73, 0x70, 0x47, 0x61, 0x6d, 0x65, 0x49, 0x6e, 0x66, 0x6f,
+	0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04,
+	0x63, 0x6f, 0x64, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x49, 0x64,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x49, 0x64,
 	0x22, 0xf9, 0x01, 0x0a, 0x0a, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12,
 	0x1c, 0x0a, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1c, 0x0a,
@@ -1923,7 +1983,7 @@ func file_fish_proto_rawDescGZIP() []byte {
 }
 
 var file_fish_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_fish_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_fish_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_fish_proto_goTypes = []interface{}{
 	(GameStatus)(0),           // 0: fish.v1.GameStatus
 	(PlayerType)(0),           // 1: fish.v1.PlayerType
@@ -1933,44 +1993,45 @@ var file_fish_proto_goTypes = []interface{}{
 	(*CsLoad)(nil),            // 5: fish.v1.CsLoad
 	(*ScLoad)(nil),            // 6: fish.v1.ScLoad
 	(*SyncLoad)(nil),          // 7: fish.v1.SyncLoad
-	(*PlayerInfo)(nil),        // 8: fish.v1.PlayerInfo
-	(*ScPlayerInfos)(nil),     // 9: fish.v1.ScPlayerInfos
-	(*BuffInfo)(nil),          // 10: fish.v1.BuffInfo
-	(*ScBuffInfo)(nil),        // 11: fish.v1.ScBuffInfo
-	(*FishPondInfo)(nil),      // 12: fish.v1.FishPondInfo
-	(*FishInfo)(nil),          // 13: fish.v1.FishInfo
-	(*ScGameStart)(nil),       // 14: fish.v1.ScGameStart
-	(*ScFishSceneInfo)(nil),   // 15: fish.v1.ScFishSceneInfo
-	(*CsFish)(nil),            // 16: fish.v1.CsFish
-	(*CatchFishInfo)(nil),     // 17: fish.v1.CatchFishInfo
-	(*ScFish)(nil),            // 18: fish.v1.ScFish
-	(*CsOperateSkill)(nil),    // 19: fish.v1.CsOperateSkill
-	(*CsOperateItem)(nil),     // 20: fish.v1.CsOperateItem
-	(*RewardInfo)(nil),        // 21: fish.v1.RewardInfo
-	(*ScRewardInfo)(nil),      // 22: fish.v1.ScRewardInfo
-	(*ScPveGameOverInfo)(nil), // 23: fish.v1.ScPveGameOverInfo
-	(*PvpRankInfo)(nil),       // 24: fish.v1.PvpRankInfo
-	(*ScPvpRank)(nil),         // 25: fish.v1.ScPvpRank
-	(*PvpGameOverInfo)(nil),   // 26: fish.v1.PvpGameOverInfo
-	(*ScPvpGameOver)(nil),     // 27: fish.v1.ScPvpGameOver
-	(*CsLeaveGame)(nil),       // 28: fish.v1.CsLeaveGame
+	(*RespGameInfo)(nil),      // 8: fish.v1.RespGameInfo
+	(*PlayerInfo)(nil),        // 9: fish.v1.PlayerInfo
+	(*ScPlayerInfos)(nil),     // 10: fish.v1.ScPlayerInfos
+	(*BuffInfo)(nil),          // 11: fish.v1.BuffInfo
+	(*ScBuffInfo)(nil),        // 12: fish.v1.ScBuffInfo
+	(*FishPondInfo)(nil),      // 13: fish.v1.FishPondInfo
+	(*FishInfo)(nil),          // 14: fish.v1.FishInfo
+	(*ScGameStart)(nil),       // 15: fish.v1.ScGameStart
+	(*ScFishSceneInfo)(nil),   // 16: fish.v1.ScFishSceneInfo
+	(*CsFish)(nil),            // 17: fish.v1.CsFish
+	(*CatchFishInfo)(nil),     // 18: fish.v1.CatchFishInfo
+	(*ScFish)(nil),            // 19: fish.v1.ScFish
+	(*CsOperateSkill)(nil),    // 20: fish.v1.CsOperateSkill
+	(*CsOperateItem)(nil),     // 21: fish.v1.CsOperateItem
+	(*RewardInfo)(nil),        // 22: fish.v1.RewardInfo
+	(*ScRewardInfo)(nil),      // 23: fish.v1.ScRewardInfo
+	(*ScPveGameOverInfo)(nil), // 24: fish.v1.ScPveGameOverInfo
+	(*PvpRankInfo)(nil),       // 25: fish.v1.PvpRankInfo
+	(*ScPvpRank)(nil),         // 26: fish.v1.ScPvpRank
+	(*PvpGameOverInfo)(nil),   // 27: fish.v1.PvpGameOverInfo
+	(*ScPvpGameOver)(nil),     // 28: fish.v1.ScPvpGameOver
+	(*CsLeaveGame)(nil),       // 29: fish.v1.CsLeaveGame
 }
 var file_fish_proto_depIdxs = []int32{
 	0,  // 0: fish.v1.ScGameStatus.gameStatus:type_name -> fish.v1.GameStatus
 	1,  // 1: fish.v1.PlayerInfo.playerType:type_name -> fish.v1.PlayerType
-	8,  // 2: fish.v1.ScPlayerInfos.playerInfos:type_name -> fish.v1.PlayerInfo
+	9,  // 2: fish.v1.ScPlayerInfos.playerInfos:type_name -> fish.v1.PlayerInfo
 	2,  // 3: fish.v1.BuffInfo.bufType:type_name -> fish.v1.BuffType
-	10, // 4: fish.v1.ScBuffInfo.buffInfos:type_name -> fish.v1.BuffInfo
+	11, // 4: fish.v1.ScBuffInfo.buffInfos:type_name -> fish.v1.BuffInfo
 	2,  // 5: fish.v1.ScBuffInfo.buffType:type_name -> fish.v1.BuffType
-	13, // 6: fish.v1.ScFishSceneInfo.fishInfos:type_name -> fish.v1.FishInfo
-	12, // 7: fish.v1.ScFishSceneInfo.fisnPondInfo:type_name -> fish.v1.FishPondInfo
-	17, // 8: fish.v1.ScFish.catchFishInfos:type_name -> fish.v1.CatchFishInfo
+	14, // 6: fish.v1.ScFishSceneInfo.fishInfos:type_name -> fish.v1.FishInfo
+	13, // 7: fish.v1.ScFishSceneInfo.fisnPondInfo:type_name -> fish.v1.FishPondInfo
+	18, // 8: fish.v1.ScFish.catchFishInfos:type_name -> fish.v1.CatchFishInfo
 	3,  // 9: fish.v1.RewardInfo.rewardType:type_name -> fish.v1.RewardType
-	21, // 10: fish.v1.ScRewardInfo.rewardInfo:type_name -> fish.v1.RewardInfo
-	13, // 11: fish.v1.ScPveGameOverInfo.fishInfos:type_name -> fish.v1.FishInfo
-	21, // 12: fish.v1.ScPveGameOverInfo.rewardInfos:type_name -> fish.v1.RewardInfo
-	24, // 13: fish.v1.ScPvpRank.rankInfos:type_name -> fish.v1.PvpRankInfo
-	26, // 14: fish.v1.ScPvpGameOver.gameOverInfos:type_name -> fish.v1.PvpGameOverInfo
+	22, // 10: fish.v1.ScRewardInfo.rewardInfo:type_name -> fish.v1.RewardInfo
+	14, // 11: fish.v1.ScPveGameOverInfo.fishInfos:type_name -> fish.v1.FishInfo
+	22, // 12: fish.v1.ScPveGameOverInfo.rewardInfos:type_name -> fish.v1.RewardInfo
+	25, // 13: fish.v1.ScPvpRank.rankInfos:type_name -> fish.v1.PvpRankInfo
+	27, // 14: fish.v1.ScPvpGameOver.gameOverInfos:type_name -> fish.v1.PvpGameOverInfo
 	15, // [15:15] is the sub-list for method output_type
 	15, // [15:15] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
@@ -2033,7 +2094,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PlayerInfo); i {
+			switch v := v.(*RespGameInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2045,7 +2106,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScPlayerInfos); i {
+			switch v := v.(*PlayerInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2057,7 +2118,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BuffInfo); i {
+			switch v := v.(*ScPlayerInfos); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2069,7 +2130,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScBuffInfo); i {
+			switch v := v.(*BuffInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2081,7 +2142,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FishPondInfo); i {
+			switch v := v.(*ScBuffInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2093,7 +2154,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FishInfo); i {
+			switch v := v.(*FishPondInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2105,7 +2166,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScGameStart); i {
+			switch v := v.(*FishInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2117,7 +2178,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScFishSceneInfo); i {
+			switch v := v.(*ScGameStart); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2129,7 +2190,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CsFish); i {
+			switch v := v.(*ScFishSceneInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2141,7 +2202,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CatchFishInfo); i {
+			switch v := v.(*CsFish); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2153,7 +2214,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScFish); i {
+			switch v := v.(*CatchFishInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2165,7 +2226,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CsOperateSkill); i {
+			switch v := v.(*ScFish); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2177,7 +2238,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CsOperateItem); i {
+			switch v := v.(*CsOperateSkill); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2189,7 +2250,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RewardInfo); i {
+			switch v := v.(*CsOperateItem); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2201,7 +2262,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScRewardInfo); i {
+			switch v := v.(*RewardInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2213,7 +2274,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScPveGameOverInfo); i {
+			switch v := v.(*ScRewardInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2225,7 +2286,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PvpRankInfo); i {
+			switch v := v.(*ScPveGameOverInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2237,7 +2298,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScPvpRank); i {
+			switch v := v.(*PvpRankInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2249,7 +2310,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PvpGameOverInfo); i {
+			switch v := v.(*ScPvpRank); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2261,7 +2322,7 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ScPvpGameOver); i {
+			switch v := v.(*PvpGameOverInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2273,6 +2334,18 @@ func file_fish_proto_init() {
 			}
 		}
 		file_fish_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ScPvpGameOver); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_fish_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CsLeaveGame); i {
 			case 0:
 				return &v.state
@@ -2291,7 +2364,7 @@ func file_fish_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_fish_proto_rawDesc,
 			NumEnums:      4,
-			NumMessages:   25,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

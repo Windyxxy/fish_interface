@@ -33,6 +33,12 @@ message ScLoad{
 message SyncLoad{
 }
 
+message RespGameInfo {
+	// 是否需要发csload | @inject_tag: msgpack:"code" json:"code"
+	int32 code  = 1 ;  // 0 -不需要发 1 - 表示需要发 csload
+	int32 playerId = 2 ; //
+}
+
 enum PlayerType {
 	PlayerType_None = 0 ;
 	PlayerType_Real = 1 ; // 真实玩家
