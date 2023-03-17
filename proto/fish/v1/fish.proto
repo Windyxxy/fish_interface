@@ -60,6 +60,8 @@ message PlayerInfo {
 	int32 skillId = 6;	
 	// 玩家类型 | @inject_tag: msgpack:"playerType" json:"playerType"
 	PlayerType playerType = 7 ;
+	// y鱼塘的位置 | @inject_tag: msgpack:"playerType" json:"playerType"
+	int32  posY = 8 ;
 }
 
 message ScPlayerInfos {
@@ -212,7 +214,7 @@ message RewardInfo {
 // 奖励推送
 message ScRewardInfo {
 	// 奖励信息 | @inject_tag: msgpack:"rewardInfo" json:"rewardInfo"
-	RewardInfo rewardInfo = 1 ;
+	repeated RewardInfo rewardInfos = 1 ;
 }
 
 message ScPveGameOverInfo {
