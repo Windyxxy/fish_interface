@@ -143,8 +143,8 @@ message FishInfo {
 message ScGameStart {
 	// 游戏开始时间 | @inject_tag: msgpack:"gameStartTime" json:"gameStartTime"
 	int64  gameStartTime = 1;	
-	// 鱼池Id | @inject_tag: msgpack:"fishPondId" json:"fishPondId"
-	int32  fishPondId  = 2 ;
+	// PVE 或PVP关卡ID | @inject_tag: msgpack:"levelId" json:"levelId"
+	int32  levelId  = 2 ;
 }
 
 message ScFishSceneInfo {
