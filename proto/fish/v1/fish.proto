@@ -217,9 +217,16 @@ message ScRewardInfo {
 	repeated RewardInfo rewardInfos = 1 ;
 }
 
+message GameOverFishInfo {
+	// 鱼的ID | @inject_tag: msgpack:"fishId" json:"fishId"
+	int32 fishId = 1 ;
+	// 鱼的数量 | @inject_tag: msgpack:"num" json:"num"
+	int32 num = 2 ;
+}
+
 message ScPveGameOverInfo {
-	// 获得鱼 | @inject_tag: msgpack:"fishInfos" json:"fishInfos"
-	repeated FishInfo fishInfos = 1 ;
+	// 获得鱼 | @inject_tag: msgpack:"gameOverFishInfos" json:"gameOverFishInfos"
+	repeated GameOverFishInfo gameOverFishInfos = 1 ;
 	// 奖励 | @inject_tag: msgpack:"rewardInfos" json:"rewardInfos"
 	repeated RewardInfo rewardInfos = 2 ;
 	// 分数 | @inject_tag: msgpack:"score" json:"score"
