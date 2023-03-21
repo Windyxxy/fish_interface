@@ -137,6 +137,8 @@ message FishInfo {
 	int32 posY = 3 ;
 	// 鱼类数量 | @inject_tag: msgpack:"num" json:"num"
 	int32 num = 4;
+	// 鱼配置ID | @inject_tag: msgpack:"configId" json:"configId"
+	int32 configId = 5 ;
 }
 
 // 游戏开始
@@ -282,7 +284,7 @@ message CsLeaveGame {
 
 // 续局
 enum ContinueType {
-	ContinueType_None = 0 ;
+	ContinueType_None = 0 ;      // 表示取消
 	ContinueType_PSNotEnough_Adv = 1 ;  // 体力不足看广告
 	ContinueType_PSNotEnough_Share = 2 ;  // 体力不足分享
 	ContinueType_PSNotEnough_Coin = 3 ;  // 体力不足代币
