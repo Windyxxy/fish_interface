@@ -179,13 +179,16 @@ message ScFish {
 message CsOperateSkill {
 	// 技能ID | @inject_tag: msgpack:"skillId" json:"skillId"
 	int32 skillId = 1 ;
+	// 目标玩家 | @inject_tag: msgpack:"targetId" json:"targetId"
+	int32 targetId = 2 ; 
 }
 
 // 道具操作
-
 message CsOperateItem {
-	// 技能ID | @inject_tag: msgpack:"skillId" json:"skillId"
-	int32 skillId = 1 ;
+	// 道具ID | @inject_tag: msgpack:"itemId" json:"itemId"
+	int32 itemId = 1 ;
+	// 目标玩家 | @inject_tag: msgpack:"targetId" json:"targetId"
+	int32 targetId = 2 ; 
 }
 
 
@@ -202,6 +205,9 @@ enum RewardType {
 	ThunderRune = 6 ; //雷霆符文
 	HotRune = 7 ;// 赤炎符文
 	PSRune = 8 ; //体力
+	RewardType_None = 9 ; // 无
+	AddTime = 10 ; // 延长时间
+	ThrowCnt = 11 ; // 投掷次数
 }
 
 message RewardInfo {
@@ -214,7 +220,7 @@ message RewardInfo {
 // 奖励推送
 message ScRewardInfo {
 	// 奖励信息 | @inject_tag: msgpack:"rewardInfo" json:"rewardInfo"
-	repeated RewardInfo rewardInfos = 1 ;
+	RewardInfo rewardInfo = 1 ;
 }
 
 message GameOverFishInfo {
@@ -274,3 +280,26 @@ message ScPvpGameOver{
 message CsLeaveGame {
 }
 
+// 续局
+enum ContinueType {
+	ContinueType_None = 0 ;
+	ContinueType_PSNotEnough_Adv = 1 ;  // 体力不足看广告
+	ContinueType_PSNotEnough_Share = 2 ;  // 体力不足分享
+	ContinueType_PSNotEnough_Coin = 3 ;  // 体力不足代币
+	ContinueType_Reward_LowTen = 4 ;  // 奖励低于10%
+	ContinueType_Reward_None = 5 ;  // 没有奖励
+	ContinueType_Reward_Blue = 6 ;  // 奖励蓝色
+}
+
+// 续局
+message CsContinue {
+	// 续局的类型 | @inject_tag: msgpack:"continueType" json:"continueType"
+	ContinueType continueType = 1 ;
+}
+
+message ScContinue { 
+    // 续局的时间 | @inject_tag: msgpack:"addTime" json:"addTime"
+	int32 addTime = 1 ;
+	 // 续局的次数 | @inject_tag: msgpack:"addCount" json:"addCount"
+	int32 addCount = 2 ;
+}
