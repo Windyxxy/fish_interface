@@ -149,11 +149,14 @@ message ScGameStart {
 	int32  levelId  = 2 ;
 }
 
+
 message ScFishSceneInfo {
 	// 鱼池Id | @inject_tag: msgpack:"fishGroupInfos" json:"fishGroupInfos"
 	repeated FishGroupInfo fishGroupInfos = 1 ;
 	// 鱼塘 | @inject_tag: msgpack:"fisnPondInfo" json:"fisnPondInfo"
 	FishPondInfo fisnPondInfo = 2 ;
+	//Pvp道具Id | @inject_tag: msgpack:"itemId" json:"itemId"
+	int32 itemId = 3;
 }
 
 // 捕鱼操作
@@ -185,6 +188,8 @@ message ScFish {
 	int32 combo = 2 ; 
 	// 类型 | @inject_tag: msgpack:"catchType" json:"catchType"
 	CatchType catchType = 3 ; 
+	//Pvp道具Id | @inject_tag: msgpack:"itemId" json:"itemId"
+	int32 itemId = 4;
 }
 
 // 技能操作
