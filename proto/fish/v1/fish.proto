@@ -251,6 +251,9 @@ message PvpRankInfo {
 	int32 score = 2 ;
 	// 排名 | @inject_tag: msgpack:"rankNo" json:"rankNo"
 	int32 rankNo = 3 ;
+	// 客户端用  | @inject_tag: msgpack:"init" json:"init"
+	bool init = 4 ;
+	
 }
 
 message ScPvpRank {
