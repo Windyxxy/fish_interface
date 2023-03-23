@@ -171,10 +171,20 @@ message CatchFishInfo {
 	int32 num = 3 ; 
 }
 
+enum CatchType {
+	CatchType_None = 0 ;
+	CatchType_Perfect = 1 ;
+	CatchType_Good = 2;
+	CatchType_Finish = 3 ;
+}
 
 message ScFish {
 	// 捕鱼返回的信息 | @inject_tag: msgpack:"catchFishInfos" json:"catchFishInfos"
 	repeated CatchFishInfo catchFishInfos = 1 ;
+	// Combo次数 | @inject_tag: msgpack:"combo" json:"combo"
+	int32 combo = 2 ; 
+	// 类型 | @inject_tag: msgpack:"catchType" json:"catchType"
+	CatchType catchType = 3 ; 
 }
 
 // 技能操作
