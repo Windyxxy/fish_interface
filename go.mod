@@ -1,4 +1,4 @@
-module fish_interface
+module github.com/Windyxxy/fish_interface
 
 go 1.20
 
