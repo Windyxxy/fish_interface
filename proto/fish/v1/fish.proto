@@ -286,7 +286,7 @@ message PvpGameOverInfo{
 	int32 rankNo = 3 ;
 	// 完美次数 | @inject_tag: msgpack:"perfectScore" json:"perfectScore"
 	int32 perfectNum = 4 ;
-	// 连击次数 | @inject_tag: msgpack:"comobScore" json:"comobScore"
+	// 连击次数 | @inject_tag: msgpack:"comobNum" json:"comobNum"
 	int32 comobNum = 5 ;
 }
 
