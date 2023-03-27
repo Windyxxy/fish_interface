@@ -323,3 +323,7 @@ message ScContinue {
 	 // 续局的次数 | @inject_tag: msgpack:"addCount" json:"addCount"
 	int32 addCount = 2 ;
 }
+
+// pvp 返回平台
+message CsReturnPlatform {
+}
