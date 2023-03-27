@@ -1963,8 +1963,8 @@ type PvpGameOverInfo struct {
 	Score int32 `protobuf:"varint,2,opt,name=score,proto3" json:"score" msgpack:"score"`
 	// 排名 | @inject_tag: msgpack:"rankNo" json:"rankNo"
 	RankNo int32 `protobuf:"varint,3,opt,name=rankNo,proto3" json:"rankNo" msgpack:"rankNo"`
-	// 完美次数 | @inject_tag: msgpack:"perfectScore" json:"perfectScore"
-	PerfectNum int32 `protobuf:"varint,4,opt,name=perfectNum,proto3" json:"perfectScore" msgpack:"perfectScore"`
+	// 完美次数 | @inject_tag: msgpack:"perfectNum" json:"perfectNum"
+	PerfectNum int32 `protobuf:"varint,4,opt,name=perfectNum,proto3" json:"perfectNum" msgpack:"perfectNum"`
 	// 连击次数 | @inject_tag: msgpack:"comobNum" json:"comobNum"
 	ComobNum int32 `protobuf:"varint,5,opt,name=comobNum,proto3" json:"comobNum" msgpack:"comobNum"`
 }

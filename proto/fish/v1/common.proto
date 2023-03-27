@@ -61,7 +61,7 @@ message AccountInfo {
   string avatar = 3;
   // | @inject_tag: msgpack:"gender" json:"gender"
   int32 gender = 4;
-}
+ }
 
 message NormalInfo {
   // 备注信息 | @inject_tag: msgpack:"msg" json:"msg"
@@ -103,6 +103,11 @@ message DataInfoResp {
   int32 code = 1;
   // @inject_tag: msgpack:"msg"
   string msg = 2;
+}
+
+message RoleInfoRep {
+  // 配置角色ID| @inject_tag: msgpack:"role"
+  int32 roleId = 1;
 }
 
 
